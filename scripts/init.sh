@@ -32,8 +32,8 @@ rm_all_build(){
     cd ${ROOT_DIR} && rm */*/*.wasm && rm */*/*.wast && rm */*/*.abi
 }
 
-# usage: system_newaccount account_name owner_key [active_key]
-system_newaccount(){
+# usage: create_account account_name owner_key [active_key]
+create_account(){
     $cleos system newaccount --stake-net "100.0000 EOS" --stake-cpu "100.0000 EOS" --buy-ram "100.0000 EOS" eosio $1 $2 $3 -p eosio
 }
 
@@ -45,17 +45,25 @@ create_account_and_import_key(){
     account=$1
     pub_key=`get_pub $2`
     pri_key=`get_pri $2`
-    system_newaccount ${account} ${pub_key}
+    create_account ${account} ${pub_key}
     import_key ${pri_key}
 }
 
+new_account(){
+    account=$1
+
+    str=`cleos create key`
+    pri_key=`echo $str | cut -d' ' -f 3`
+    pub_key=`echo $str | cut -d' ' -f 6`
+
+    create_account ${account} ${pub_key}
+    import_key ${pri_key}
+}
 
 add_abi_types(){
     abi_file=$1
     jq ' .types = [{"new_type_name":"account_name","type": "name"}]' ${abi_file} > tmp.abi && mv tmp.abi ${abi_file}
 }
-
-
 
 
 

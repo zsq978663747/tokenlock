@@ -43,11 +43,11 @@ create_and_issue_eos_token(){
 create_and_issue_eos_token
 
 
-#Setting privileged account for eosio.msig
 set_msig_privilege(){
     $cleos push action eosio setpriv '{"account": "eosio.msig", "is_priv": 1}' -p eosio
 }
 set_msig_privilege
+
 
 deploy_system_contract(){
     $cleos set contract eosio /opt/eosio/bin/data-dir/contracts/eosio.system -x 1000 -p eosio
