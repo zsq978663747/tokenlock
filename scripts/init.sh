@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ROOT_DIR='/Users/song/Home/Golang/src/bitbucket.org/vchengsong/eos-sct'
+ROOT_DIR='/Users/song/Home/Golang/src/github.com/EosTokenMarket/tokenlock/'
 
 IMAGE_OFFICAL='eosio/eos'
 IMAGE_MAINNET='eoslaomao/eos:mainnet-1.1.1'
