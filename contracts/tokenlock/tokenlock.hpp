@@ -11,7 +11,7 @@
 #include <eosiolib/symbol.hpp>
 #include <string>
 
-const uint32_t day = 10;
+const uint32_t day = 3600 * 24;
 
 namespace tokenlock {
 
