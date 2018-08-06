@@ -20,15 +20,11 @@ fi
 
 # step 4: build and deploy contract.
 if [[ "${action}" == '' || "${action}" == 'deploy' ]]; then
-    build_deploy_contract(){
-        cd ${ROOT_DIR}/contracts/${contract}
-        eosiocpp -o ${contract}.wast ${contract}.cpp
-        eosiocpp -g ${contract}.abi  ${contract}.cpp
-        cd -
-
-        $cleos set contract  ${accountaddr} /mycts/${contract} -p ${accountaddr}
-    }
-    build_deploy_contract
+    set -x
+    #build_contract_locally ${contract}
+    build_contract_docker ${contract}
+    $cleos set contract  ${accountaddr} /mycts/${contract} -p ${accountaddr}
+    md5 *
 fi
 
 # step 5: test

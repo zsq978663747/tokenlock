@@ -25,7 +25,7 @@ get_pub(){
 }
 
 rm_build_files(){
-    rm *.wast *.wasm *.abi >/dev/null
+    rm *.wast *.wasm *.abi 2>/dev/null
 }
 
 rm_all_build(){
@@ -63,6 +63,30 @@ new_account(){
 add_abi_types(){
     abi_file=$1
     jq ' .types = [{"new_type_name":"account_name","type": "name"}]' ${abi_file} > tmp.abi && mv tmp.abi ${abi_file}
+}
+
+build_contract_docker(){
+    contract=$1
+
+    version=$2
+    if [ "$2" == "" ];then
+        version='v1.1.1'
+    fi
+
+    cd ${ROOT_DIR}/contracts/${contract} && rm_build_files
+    docker run --rm -v `pwd`:/scts eosio/eos-dev:${version} bash -c "cd /scts \
+        && eosiocpp -o ${contract}.wast ${contract}.cpp \
+        && eosiocpp -g ${contract}.abi ${contract}.cpp"
+    cd -
+}
+
+build_contract_locally(){
+    contract=$1
+
+    cd ${ROOT_DIR}/contracts/${contract} && rm_build_files
+    eosiocpp -o ${contract}.wast ${contract}.cpp
+    eosiocpp -g ${contract}.abi  ${contract}.cpp
+    cd -
 }
 
 
