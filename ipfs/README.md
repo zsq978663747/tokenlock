@@ -1,5 +1,6 @@
 
-在当前目录运行如下命令，以保存ipfs文件。
+
+run this command under the current directory, to save ipfs files in folder v1.
 ``` 
 . ipfs_get.sh
 ```
