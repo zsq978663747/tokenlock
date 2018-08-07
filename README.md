@@ -22,7 +22,7 @@
 4. 审核通过后，安全团队提供审核报告。
 
 
-### 合约文件
+### 合约文件及编译环境
 
 | version | file | ipfs address | 
 | ------- | ---- | ------------ | 
@@ -31,13 +31,20 @@
 | v1 | [tokenlock.wast](https://ipfs.io/ipfs/QmXLXEmLQqRL8ZMPoskH5rwwebRHKrHfz7hL6v8C7tNqWU) | QmXLXEmLQqRL8ZMPoskH5rwwebRHKrHfz7hL6v8C7tNqWU |
 | v1 | [tokenlock.wasm](https://ipfs.io/ipfs/Qmef92Gfr5CMqnAXLytDcVfTDtbVjZvTjrjqJSsu2wAtT1) | Qmef92Gfr5CMqnAXLytDcVfTDtbVjZvTjrjqJSsu2wAtT1 |
 | v1 | [tokenlock.abi](https://ipfs.io/ipfs/QmVQPWTZD2xvZLjU83aaWpjPtNo5fG5rbvhSeeXkkxbLTt)  | QmVQPWTZD2xvZLjU83aaWpjPtNo5fG5rbvhSeeXkkxbLTt |
-| v1 |eos-dev image version: v1.1.1 image id: 8fa0988c81cc||
 
+``` 
+version: v1
+eosio-dev: version v1.1.1 , image id 8fa0988c81cc
+build command:
+cd contracts/tokenlock
+docker run --rm -v `pwd`:/scts eosio/eos-dev:v1.1.1 bash -c "cd /scts \
+    && eosiocpp -o ${contract}.wast ${contract}.cpp \
+    && eosiocpp -g ${contract}.abi ${contract}.cpp"
+```
 
-相关说明：
-[ipfs gateway](https://ipfs.github.io/public-gateway-checker/)
-你可以通过任何一个活跃的网关，如 https://ipfs.io/ipfs/<ipfs-address> 访问文件. 
-
+相关说明：  
+[ipfs gateway list](https://ipfs.github.io/public-gateway-checker/)  
+你可以通过任何一个活跃的网关，如 `https://ipfs.io/ipfs/<ipfs-address>` 访问文件.   
 
 ### ipfs 常用命令
 ``` 
