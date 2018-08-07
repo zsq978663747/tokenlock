@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # step 1: init
-. ../../scripts/init.sh
+. scripts/init.sh
 action=$1
 
 # step 2: set your own variables
@@ -11,7 +11,7 @@ issuer="boss"               # token issuer
 
 # step 3: bios boot and create accounts;
 if [ "${action}" == '' ];then
-    . ../../scripts/boot.sh
+    . scripts/boot.sh
 
     for name in ${accountaddr} boss inita initb initc initd; do
         new_account ${name}
@@ -24,7 +24,6 @@ if [[ "${action}" == '' || "${action}" == 'deploy' ]]; then
     #build_contract_locally ${contract}
     build_contract_docker ${contract}
     $cleos set contract  ${accountaddr} /mycts/${contract} -p ${accountaddr}
-    md5 *
 fi
 
 # step 5: test
