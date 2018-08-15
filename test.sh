@@ -22,7 +22,7 @@ fi
 if [[ "${action}" == '' || "${action}" == 'deploy' ]]; then
     set -x
     #build_contract_locally ${contract}
-    build_contract_docker ${contract}
+    #build_contract_docker ${contract}
     $cleos set contract  ${accountaddr} /mycts/${contract} -p ${accountaddr}
 fi
 
@@ -69,7 +69,7 @@ if [ "${action}" == 'test' ]; then
     test_transfer
 
     test_issue_lock(){
-        $cleos push action ${accountaddr} issuelock '["initc", "100.00 CVBT", 100, 2, "2018-08-06T5:21:0","mmmm"]' -p ${issuer}
+        $cleos push action ${accountaddr} issuelock '["initc", "100.00 CVBT", 100, 2, "2018-08-15T5:21:0","mmmm"]' -p ${issuer}
         $cleos get table ${accountaddr} initc issues
         $cleos get table ${accountaddr} CVBT stat
 
