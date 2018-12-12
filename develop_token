@@ -1,0 +1,33 @@
+1.create two accounts
+xxxxxxxtoken and xxxxxxxxeost
+
+1.develop contract
+```
+cleos set contract xxxxxxxtoken tokenlock/contracts/tokenlock/  -p xxxxxxxtoken
+```
+
+2.create token 
+```
+cleos push action xxxxxxxtoken create '["xxxxxxxxeost", "10000000000.0000 EST","EST"]' -p xxxxxxxtoken
+```
+
+3.issu token
+```
+cleos push action xxxxxxxtoken issue '["xxxxxxxxeost",  "1000000000.0000 EST", "zsq"]' -p xxxxxxxxeost
+```
+
+4.check the token 
+```
+cleos get currency balance xxxxxxxtoken xxxxxxxxeost
+```
+5.issulock
+```
+cleos push action  xxxxxxxtoken issuelock '["zhangshiqi11","100.0000 EST",10,1,"2018-12-12T20:00:00","test"]' -p xxxxxxxxeost
+```
+
+6.transfer
+```
+cleos push action xxxxxxxtoken transfer '["xxxxxxxxeost","zhangshiqi11","100.0000 EST"]' -p xxxxxxxxeost
+cleos push action eostoretoken transfer '["eosstoreeost","zhangshiqi11","100.0000 EST","111"]' -p eosstoreeost
+
+```
